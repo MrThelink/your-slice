@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Menu - Your Slice</title>
+    <!-- Add favicon to fix 404 error -->
+    <link rel="icon" type="image/png" sizes="32x32" data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==" />
+    <link rel="stylesheet" href="../shared/shared.css">
+    <link rel="stylesheet" href="menu.css">
+    <script src="../shared/shared.js" defer></script>
+    <script src="menu.js" defer></script>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header-placeholder"></div>
+
+    <!-- Daily Lunch Menu Section -->
+    <section id="menu" class="menu-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Daily Lunch Specials</h2>
+                <p>Fresh options every day - available from 11:30 AM to 2:30 PM</p>
+            </div>
+
+            <div class="lunch-menu-container">
+                <div class="day-selector">
+                    <button class="day-btn active" data-day="monday">Monday<span class="today-highlight" id="today-indicator">Today</span></button>
+                    <button class="day-btn" data-day="tuesday">Tuesday</button>
+                    <button class="day-btn" data-day="wednesday">Wednesday</button>
+                    <button class="day-btn" data-day="thursday">Thursday</button>
+                    <button class="day-btn" data-day="friday">Friday</button>
+                    <button class="day-btn" data-day="saturday">Saturday</button>
+                    <button class="day-btn" data-day="sunday">Sunday</button>
+                </div>
+
+                <!-- Dynamic Daily Menus -->
+                <div class="daily-menu active" id="monday-menu">
+                    <div class="daily-menu-header">
+                        <h3>Monday Lunch Specials</h3>
+                        <p id="menu-status">Loading fresh menu from our kitchen...</p>
+                    </div>
+                    <div class="menu-options" id="dynamic-menu-options">
+                        <!-- Dynamic content will be loaded here -->
+                        <div class="loading-placeholder">
+                            <div class="loading-icon">🍕</div>
+                            <p>Preparing today's fresh menu...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="daily-menu" id="tuesday-menu">
+                    <div class="daily-menu-header">
+                        <h3>Tuesday Lunch Specials</h3>
+                        <p>Check back on Tuesday for fresh selections!</p>
+                    </div>
+                    <div class="menu-options">
+                        <div class="coming-soon-message">
+                            <div class="coming-soon-icon">📅</div>
+                            <h4>Menu Coming Tuesday</h4>
+                            <p>Our chefs are preparing Tuesday's special selection. Check back then!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="daily-menu" id="wednesday-menu">
+                    <div class="daily-menu-header">
+                        <h3>Wednesday Lunch Specials</h3>
+                        <p>Check back on Wednesday for fresh selections!</p>
+                    </div>
+                    <div class="menu-options">
+                        <div class="coming-soon-message">
+                            <div class="coming-soon-icon">📅</div>
+                            <h4>Menu Coming Wednesday</h4>
+                            <p>Our chefs are preparing Wednesday's special selection. Check back then!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="daily-menu" id="thursday-menu">
+                    <div class="daily-menu-header">
+                        <h3>Thursday Lunch Specials</h3>
+                        <p>Check back on Thursday for fresh selections!</p>
+                    </div>
+                    <div class="menu-options">
+                        <div class="coming-soon-message">
+                            <div class="coming-soon-icon">📅</div>
+                            <h4>Menu Coming Thursday</h4>
+                            <p>Our chefs are preparing Thursday's special selection. Check back then!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="daily-menu" id="friday-menu">
+                    <div class="daily-menu-header">
+                        <h3>Friday Lunch Specials</h3>
+                        <p>Check back on Friday for fresh selections!</p>
+                    </div>
+                    <div class="menu-options">
+                        <div class="coming-soon-message">
+                            <div class="coming-soon-icon">📅</div>
+                            <h4>Menu Coming Friday</h4>
+                            <p>Our chefs are preparing Friday's special selection. Check back then!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="daily-menu" id="saturday-menu">
+                    <div class="daily-menu-header">
+                        <h3>Saturday Lunch Specials</h3>
+                        <p>Check back on Saturday for fresh selections!</p>
+                    </div>
+                    <div class="menu-options">
+                        <div class="coming-soon-message">
+                            <div class="coming-soon-icon">📅</div>
+                            <h4>Menu Coming Saturday</h4>
+                            <p>Our chefs are preparing Saturday's special selection. Check back then!</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="daily-menu" id="sunday-menu">
+                    <div class="daily-menu-header">
+                        <h3>Sunday Lunch Specials</h3>
+                        <p>Check back on Sunday for fresh selections!</p>
+                    </div>
+                    <div class="menu-options">
+                        <div class="coming-soon-message">
+                            <div class="coming-soon-icon">📅</div>
+                            <h4>Menu Coming Sunday</h4>
+                            <p>Our chefs are preparing Sunday's special selection. Check back then!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weekly Overview -->
+            <div class="week-menu">
+                <div class="section-title">
+                    <h2>Weekly Lunch Overview</h2>
+                    <p>Plan your week with our delicious lunch options</p>
+                </div>
+                <div class="week-grid" id="weekly-overview">
+                    <!-- Weekly overview will be dynamically populated -->
+                    <div class="loading-week">
+                        <div class="loading-icon">📊</div>
+                        <p>Loading weekly menu overview...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Panel -->
+    <div class="cart-panel">
+        <div class="cart-header">
+            <h2>Your Order</h2>
+            <button class="close-cart">×</button>
+        </div>
+        <div class="cart-items">
+            <div class="empty-cart">
+                <div>🛒</div>
+                <p>Your cart is empty</p>
+            </div>
+        </div>
+        <div class="cart-summary">
+            <div class="summary-row">
+                <span>Subtotal:</span>
+                <span class="cart-subtotal">€0.00</span>
+            </div>
+            <div class="summary-row">
+                <span>Delivery fee:</span>
+                <span class="delivery-fee">€2.50</span>
+            </div>
+            <div class="summary-row summary-total">
+                <span>Total:</span>
+                <span class="cart-total">€2.50</span>
+            </div>
+            <button class="checkout-btn">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Login Dialog -->
+    <dialog id="loginDialog">
+        <button class="close-btn" aria-label="Close">✕</button>
+        <form method="dialog" class="login-form">
+            <h2>Log in</h2>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" minlength="3" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" pattern=".+@metropolia\.fi$" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password"
+                pattern="(?=.*[A-Z])(?=.*[0-9]).{6,}" required>
+            <menu>
+                <button value="cancel" class="cancel-btn">Cancel</button>
+                <button value="submit" class="submit-btn">Log in</button>
+            </menu>
+        </form>
+    </dialog>
+
+    <!-- Sign Up Dialog -->
+    <dialog id="signupDialog">
+        <button class="close-btn" aria-label="Close">✕</button>
+        <form method="dialog" class="signup-form">
+            <h2>Sign up</h2>
+            <div class="form-row">
+                <div>
+                    <label for="signup-name">First Name:</label>
+                    <input type="text" id="signup-name" name="signup-name" minlength="2" required>
+                </div>
+                <div>
+                    <label for="signup-surname">Last Name:</label>
+                    <input type="text" id="signup-surname" name="signup-surname" minlength="2" required>
+                </div>
+            </div>
+            <label for="signup-age">Age:</label>
+            <input type="number" id="signup-age" name="signup-age" min="16" max="120" required>
+            <label for="signup-email">Email:</label>
+            <input type="email" id="signup-email" name="signup-email" pattern=".+@metropolia\.fi$" required>
+            <p class="instructions">Must be a @metropolia.fi email address</p>
+            <label for="signup-password">Password:</label>
+            <input type="password" id="signup-password" name="signup-password"
+                pattern="(?=.*[A-Z])(?=.*[0-9]).{6,}" required>
+            <p class="instructions">Must contain at least one uppercase letter, one number, and be at least 6 characters long</p>
+            <menu>
+                <button value="cancel" class="cancel-btn">Cancel</button>
+                <button value="submit" class="submit-btn">Sign up</button>
+            </menu>
+        </form>
+    </dialog>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // Global variables
+        let currentMenuData = [];
+        
+        // Day mapping for getting correct day names
+        const dayNames = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+        const today = new Date().getDay();
+        const currentDay = dayNames[today];
+
+        // Initialize page when shared.js loads components
+        window.initializeMenuPage = function() {
+            // Set up day selector functionality
+            const dayButtons = document.querySelectorAll('.day-btn');
+            const dailyMenus = document.querySelectorAll('.daily-menu');
+
+            // Set the correct day as active (today)
+            setActiveDay(currentDay);
+            
+            // Update today indicator to show on current day
+            updateTodayIndicator();
+
+            dayButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const day = this.getAttribute('data-day');
+                    setActiveDay(day);
+                    
+                    // Load menu for selected day
+                    if (day === currentDay) {
+                        loadTodaysMenu();
+                    }
+                });
+            });
+
+            // Load today's menu automatically
+            setTimeout(() => {
+                loadTodaysMenu();
+                loadWeeklyOverview();
+            }, 500);
+        }
+
+        function updateTodayIndicator() {
+            // Remove today indicator from all buttons
+            document.querySelectorAll('.today-highlight').forEach(indicator => {
+                indicator.remove();
+            });
+            
+            // Add today indicator to current day button
+            const todayButton = document.querySelector(`.day-btn[data-day="${currentDay}"]`);
+            if (todayButton) {
+                const indicator = document.createElement('span');
+                indicator.className = 'today-highlight';
+                indicator.id = 'today-indicator';
+                indicator.textContent = 'Today';
+                todayButton.appendChild(indicator);
+            }
+        }
+
+        function setActiveDay(day) {
+            const dayButtons = document.querySelectorAll('.day-btn');
+            const dailyMenus = document.querySelectorAll('.daily-menu');
+
+            // Remove active class from all
+            dayButtons.forEach(btn => btn.classList.remove('active'));
+            dailyMenus.forEach(menu => menu.classList.remove('active'));
+
+            // Add active class to selected
+            const activeButton = document.querySelector(`.day-btn[data-day="${day}"]`);
+            const activeMenu = document.getElementById(`${day}-menu`);
+
+            if (activeButton) activeButton.classList.add('active');
+            if (activeMenu) activeMenu.classList.add('active');
+        }
+
+        async function loadTodaysMenu() {
+            const statusElement = document.getElementById('menu-status');
+            const menuContainer = document.getElementById('dynamic-menu-options');
+
+            try {
+                statusElement.textContent = 'Loading fresh menu from our kitchen...';
+                
+                const response = await fetch('http://localhost:3001/api/menu/today');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                console.log('Menu data:', data);
+                
+                if (data.success && data.data && data.data.length > 0) {
+                    statusElement.textContent = `Fresh menu ready! ${data.data.length} delicious options available today.`;
+                    currentMenuData = data.data;
+                    displayMenuInOriginalStyle(data.data, menuContainer);
+                } else {
+                    statusElement.textContent = 'No menu available today - check back tomorrow!';
+                    showNoMenuMessage(menuContainer);
+                }
+            } catch (error) {
+                console.error('Error loading menu:', error);
+                statusElement.textContent = 'Unable to load menu - please try refreshing the page.';
+                showErrorMessage(menuContainer);
+            }
+        }
+
+        function displayMenuInOriginalStyle(menuItems, container) {
+            // Separate vegan and meat options
+            const veganItems = menuItems.filter(item => item.is_vegan);
+            const meatItems = menuItems.filter(item => !item.is_vegan);
+
+            let menuHTML = '';
+
+            // Vegan options section
+            if (veganItems.length > 0) {
+                menuHTML += `
+                    <div class="menu-option vegan">
+                        <div class="option-header">
+                            <div class="option-icon">V</div>
+                            <h4>Vegan Option</h4>
+                        </div>
+                        ${veganItems.map(item => createOriginalMenuItemHTML(item)).join('')}
+                    </div>
+                `;
+            }
+
+            // Meat options section  
+            if (meatItems.length > 0) {
+                menuHTML += `
+                    <div class="menu-option meat">
+                        <div class="option-header">
+                            <div class="option-icon">M</div>
+                            <h4>Meat Option</h4>
+                        </div>
+                        ${meatItems.map(item => createOriginalMenuItemHTML(item)).join('')}
+                    </div>
+                `;
+            }
+
+            container.innerHTML = menuHTML;
+
+            // Add event listeners to add-to-cart buttons
+            container.querySelectorAll('.add-to-cart-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productId = this.getAttribute('data-product-id');
+                    const productName = this.getAttribute('data-product-name');
+                    addToCart(productId, productName);
+                });
+            });
+        }
+
+        function createOriginalMenuItemHTML(item) {
+            return `
+                <div class="menu-item">
+                    <div class="menu-item-img">
+                        ${item.image_url ? 
+                            `<img src="${item.image_url}" alt="${item.name}" loading="lazy">` : 
+                            '<div class="placeholder-img">🍕</div>'
+                        }
+                    </div>
+                    <div class="menu-item-details">
+                        <h5>${item.name}</h5>
+                        <p>${item.description}</p>
+                        <div class="menu-item-price">€${parseFloat(item.price).toFixed(2)}</div>
+                        <button class="add-to-cart-btn" 
+                                data-product-id="${item.product_id}" 
+                                data-product-name="${item.name}">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function showNoMenuMessage(container) {
+            container.innerHTML = `
+                <div class="no-menu-message">
+                    <div class="no-menu-icon">🍽️</div>
+                    <h4>No Menu Available</h4>
+                    <p>Our kitchen is preparing something special. Check back soon!</p>
+                </div>
+            `;
+        }
+
+        function showErrorMessage(container) {
+            container.innerHTML = `
+                <div class="error-message">
+                    <div class="error-icon">⚠️</div>
+                    <h4>Unable to Load Menu</h4>
+                    <p>We're having trouble connecting to our kitchen. Please try again.</p>
+                    <button onclick="loadTodaysMenu()" class="retry-btn">Try Again</button>
+                </div>
+            `;
+        }
+
+        async function loadWeeklyOverview() {
+            const weeklyContainer = document.getElementById('weekly-overview');
+            
+            try {
+                // For now, we'll show today's menu in the weekly overview
+                // In a real application, you'd fetch data for each day of the week
+                const response = await fetch('http://localhost:3001/api/menu/today');
+                const data = await response.json();
+                
+                if (data.success && data.data && data.data.length > 0) {
+                    displayWeeklyOverview(data.data, weeklyContainer);
+                } else {
+                    weeklyContainer.innerHTML = `
+                        <div class="week-loading">
+                            <p>Weekly menu overview will be available soon!</p>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                weeklyContainer.innerHTML = `
+                    <div class="week-loading">
+                        <p>Unable to load weekly overview. Please try again later.</p>
+                    </div>
+                `;
+            }
+        }
+
+        function displayWeeklyOverview(menuItems, container) {
+            const veganItems = menuItems.filter(item => item.is_vegan);
+            const meatItems = menuItems.filter(item => !item.is_vegan);
+            
+            // Create week grid with current day's data (in real app, you'd have different data for each day)
+            const weekHTML = dayNames.map(day => {
+                const isToday = day === currentDay;
+                return `
+                    <div class="week-day ${isToday ? 'current-day' : ''}">
+                        <div class="week-day-header">
+                            <h4>${day.charAt(0).toUpperCase() + day.slice(1)}</h4>
+                            ${isToday ? '<span class="today-badge">Today</span>' : ''}
+                        </div>
+                        <div class="week-day-options">
+                            ${isToday && veganItems.length > 0 ? `
+                                <div class="week-option">
+                                    <h6><span class="vegan-label">V</span>Vegan</h6>
+                                    <p>${veganItems[0].name}</p>
+                                    <div class="week-price">€${parseFloat(veganItems[0].price).toFixed(2)}</div>
+                                </div>
+                            ` : `
+                                <div class="week-option">
+                                    <h6><span class="vegan-label">V</span>Vegan</h6>
+                                    <p>Check back ${day === currentDay ? 'today' : `on ${day}`}</p>
+                                    <div class="week-price">€3.50</div>
+                                </div>
+                            `}
+                            ${isToday && meatItems.length > 0 ? `
+                                <div class="week-option">
+                                    <h6><span class="meat-label">M</span>Meat</h6>
+                                    <p>${meatItems[0].name}</p>
+                                    <div class="week-price">€${parseFloat(meatItems[0].price).toFixed(2)}</div>
+                                </div>
+                            ` : `
+                                <div class="week-option">
+                                    <h6><span class="meat-label">M</span>Meat</h6>
+                                    <p>Check back ${day === currentDay ? 'today' : `on ${day}`}</p>
+                                    <div class="week-price">€4.00</div>
+                                </div>
+                            `}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            container.innerHTML = weekHTML;
+        }
+
+        function addToCart(productId, productName) {
+            // Create item object for the global cart system
+            const item = {
+                id: productId,
+                name: productName,
+                price: 12.50, // Default price - should get from data attribute
+                type: 'menu-item'
+            };
+            
+            // Get actual price from the button's parent container
+            const button = event.target;
+            const menuItem = button.closest('.menu-item');
+            const priceElement = menuItem ? menuItem.querySelector('.menu-item-price') : null;
+            if (priceElement) {
+                const priceText = priceElement.textContent.replace('€', '');
+                item.price = parseFloat(priceText) || 12.50;
+            }
+            
+            // Add to global cart system (this will auto-open the cart)
+            if (window.addToCart) {
+                window.addToCart(item);
+            } else {
+                // Fallback if global cart not available yet
+                console.log('Added to cart:', { productId, productName });
+                showToast(`${productName} added to cart!`, 'success');
+            }
+        }
+    </script>
+</body>
+</html>

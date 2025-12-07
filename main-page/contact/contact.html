@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Your Slice</title>
+    <link rel="stylesheet" href="../shared/shared.css">
+    <link rel="stylesheet" href="contact.css">
+    <script src="../shared/shared.js" defer></script>
+    <script src="contact.js" defer></script>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header-placeholder"></div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Your Slice</h2>
+                <p>Get in touch with us - we'd love to hear from you!</p>
+            </div>
+
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <div class="contact-icon">📍</div>
+                        <h3>Visit Us</h3>
+                        <p>Pizza Street 123<br>00100 Helsinki<br>Finland</p>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">📞</div>
+                        <h3>Call Us</h3>
+                        <p>+358 12 345 6789<br>Mon-Sun: 10:00-22:00</p>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">✉️</div>
+                        <h3>Email Us</h3>
+                        <p>hello@yourslice.fi<br>orders@yourslice.fi</p>
+                    </div>
+                    
+                    <div class="contact-card">
+                        <div class="contact-icon">🕒</div>
+                        <h3>Opening Hours</h3>
+                        <p>Mon-Thu: 10:30 - 22:00<br>
+                           Fri-Sat: 10:30 - 00:00<br>
+                           Sun: 12:00 - 22:00</p>
+                    </div>
+                </div>
+
+                <div class="contact-form-container">
+                    <h3>Send us a Message</h3>
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Your Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Select a subject</option>
+                                <option value="general">General Inquiry</option>
+                                <option value="order">Order Issue</option>
+                                <option value="feedback">Feedback</option>
+                                <option value="catering">Catering Inquiry</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" name="message" rows="5" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="faq-section">
+                <div class="section-title">
+                    <h2>Frequently Asked Questions</h2>
+                </div>
+                
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <h4>Do you offer delivery?</h4>
+                        <p>Yes! We deliver within a 5km radius. Delivery fee is €2.50 and takes 30-45 minutes.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h4>Can I customize my pizza?</h4>
+                        <p>Absolutely! Use our "Build Your Slice" feature to create your perfect custom pizza.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h4>Do you have vegan options?</h4>
+                        <p>Yes, we offer vegan cheese and plenty of vegetable toppings. Check our daily lunch menu for vegan specials.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h4>Is there gluten-free crust available?</h4>
+                        <p>Yes, we have gluten-free crust for an additional €1.50.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h4>Do you cater events?</h4>
+                        <p>Yes! We cater parties and events. Contact us for bulk orders and catering options.</p>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <h4>What payment methods do you accept?</h4>
+                        <p>We accept cash, credit cards, MobilePay, and all major payment methods.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+        <div class="container">
+            <h3>Find Us</h3>
+            <div id="map"></div>
+        </div>
+    </section>
+
+    <!-- Cart Panel -->
+    <div class="cart-panel">
+        <div class="cart-header">
+            <h2>Your Order</h2>
+            <button class="close-cart">×</button>
+        </div>
+        <div class="cart-items">
+            <div class="empty-cart">
+                <div>🛒</div>
+                <p>Your cart is empty</p>
+            </div>
+        </div>
+        <div class="cart-summary">
+            <div class="summary-row">
+                <span>Subtotal:</span>
+                <span class="cart-subtotal">€0.00</span>
+            </div>
+            <div class="summary-row">
+                <span>Delivery fee:</span>
+                <span class="delivery-fee">€2.50</span>
+            </div>
+            <div class="summary-row summary-total">
+                <span>Total:</span>
+                <span class="cart-total">€2.50</span>
+            </div>
+            <button class="checkout-btn">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Login Dialog -->
+    <dialog id="loginDialog">
+        <button class="close-btn" aria-label="Sulje">✕</button>
+        <form method="dialog" class="login-form">
+            <h2>Log in</h2>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" minlength="3" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" pattern=".+@metropolia\.fi$" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password"
+                pattern="(?=.*[A-Z])(?=.*[0-9]).{6,}" required>
+            <menu>
+                <button value="cancel" class="cancel-btn">Cancel</button>
+                <button value="submit" class="submit-btn">Log in</button>
+            </menu>
+        </form>
+    </dialog>
+
+    <!-- Sign Up Dialog -->
+    <dialog id="signupDialog">
+        <button class="close-btn" aria-label="Close">✕</button>
+        <form method="dialog" class="signup-form">
+            <h2>Sign up</h2>
+            <div class="form-row">
+                <div>
+                    <label for="signup-name">First Name:</label>
+                    <input type="text" id="signup-name" name="signup-name" minlength="2" required>
+                </div>
+                <div>
+                    <label for="signup-surname">Last Name:</label>
+                    <input type="text" id="signup-surname" name="signup-surname" minlength="2" required>
+                </div>
+            </div>
+            <label for="signup-age">Age:</label>
+            <input type="number" id="signup-age" name="signup-age" min="16" max="120" required>
+            <label for="signup-email">Email:</label>
+            <input type="email" id="signup-email" name="signup-email" pattern=".+@metropolia\.fi$" required>
+            <p class="instructions">Must be a @metropolia.fi email address</p>
+            <label for="signup-password">Password:</label>
+            <input type="password" id="signup-password" name="signup-password"
+                pattern="(?=.*[A-Z])(?=.*[0-9]).{6,}" required>
+            <p class="instructions">Must contain at least one uppercase letter, one number, and be at least 6 characters long</p>
+            <menu>
+                <button value="cancel" class="cancel-btn">Cancel</button>
+                <button value="submit" class="submit-btn">Sign up</button>
+            </menu>
+        </form>
+    </dialog>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Add Leaflet CSS and JS for the map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+</body>
+</html>

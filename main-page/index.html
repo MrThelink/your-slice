@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Slice - Home</title>
+    <!-- Add favicon to fix 404 error -->
+    <link rel="icon" type="image/png" sizes="32x32" data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==" />
+    <link rel="stylesheet" href="shared/shared.css">
+    <link rel="stylesheet" href="home/index.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    
+    <!-- Load Leaflet first -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    
+    <!-- Then load our scripts -->
+    <script src="shared/shared.js" defer></script>
+    <script src="home/index.js" defer></script>
+    <script>
+        // Add polyline decoding function to global scope
+        window.decodePolyline = function(encoded) {
+            const poly = [];
+            let index = 0, len = encoded.length;
+            let lat = 0, lng = 0;
+            
+            while (index < len) {
+                let b, shift = 0, result = 0;
+                do {
+                    b = encoded.charCodeAt(index++) - 63;
+                    result |= (b & 0x1f) << shift;
+                    shift += 5;
+                } while (b >= 0x20);
+                const dlat = ((result & 1) ? ~(result >> 1) : (result >> 1));
+                lat += dlat;
+                
+                shift = 0;
+                result = 0;
+                do {
+                    b = encoded.charCodeAt(index++) - 63;
+                    result |= (b & 0x1f) << shift;
+                    shift += 5;
+                } while (b >= 0x20);
+                const dlng = ((result & 1) ? ~(result >> 1) : (result >> 1));
+                lng += dlng;
+                
+                poly.push([lat * 1e-5, lng * 1e-5]);
+            }
+            return poly;
+        };
+    </script>
+
+    <!-- Smooth Scroll -->
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+
+    <!-- Google Translate Initialization -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'fi',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript"
+        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header-placeholder"></div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h2>Create Your Perfect Pizza Slice</h2>
+            <p>Customize every aspect of your pizza slice - from dough to toppings - baked fresh right before your eyes</p>
+            <button class="btn btn-primary btn-large" id="buildNowBtn">Build Your Slice Now</button>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section container">
+        <div class="section-title">
+            <h2>About Your Slice</h2>
+            <p>Discover what makes us special</p>
+        </div>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>Fresh, Customized Pizza Slices</h3>
+                <p>At Your Slice, we believe everyone deserves their perfect pizza. That's why we've created a unique experience where you can customize every aspect of your pizza slice, baked fresh right before your eyes.</p>
+                <p>Whether you're craving a classic Margherita or an adventurous creation with unique toppings, we've got you covered. Our daily lunch specials offer great value, and our build-your-own system lets you create exactly what you want.</p>
+                <div class="features-grid">
+                    <div class="feature">
+                        <span class="feature-icon">🍕</span>
+                        <h4>Custom Creations</h4>
+                        <p>Build your perfect slice with our step-by-step builder</p>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">🔥</span>
+                        <h4>Freshly Baked</h4>
+                        <p>Every slice is baked fresh when you order</p>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">🌱</span>
+                        <h4>Vegan Options</h4>
+                        <p>Plenty of plant-based choices available</p>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">🚴</span>
+                        <h4>Fast Delivery</h4>
+                        <p>Quick delivery right to your doorstep</p>
+                    </div>
+                </div>
+            </div>
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Our Pizza">
+            </div>
+        </div>
+    </section>
+
+    <!-- Today's Menu Section -->
+    <section id="todays-menu" class="todays-menu-section">
+        <div class="container">
+            <div id="todays-menu-container">
+                <!-- Menu items will be loaded here dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section id="location" class="location-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Visit Us</h2>
+                <p>Find our location and get directions</p>
+            </div>
+            <div class="location-content">
+                <div class="location-info">
+                    <h3>Our Restaurant</h3>
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <strong>Address:</strong>
+                            <p>Pizza Street 123, 00100 Helsinki, Finland</p>
+                        </div>
+                        <div class="contact-item">
+                            <strong>Phone:</strong>
+                            <p>+358 12 345 6789</p>
+                        </div>
+                        <div class="contact-item">
+                            <strong>Email:</strong>
+                            <p>hello@yourslice.fi</p>
+                        </div>
+                        <div class="contact-item">
+                            <strong>Opening Hours:</strong>
+                            <p>Mon-Thu: 10:30 - 22:00</p>
+                            <p>Fri-Sat: 10:30 - 00:00</p>
+                            <p>Sun: 12:00 - 22:00</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" onclick="getDirections()">Get Directions</button>
+                </div>
+                <div class="map-container">
+                    <div id="map"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map functionality is handled by home/index.js -->
+    <script>
+        // Simple map test - check if Leaflet loads
+        window.addEventListener('load', function() {
+            console.log('Leaflet available:', typeof L !== 'undefined');
+            console.log('Map element exists:', !!document.getElementById('map'));
+        });
+    </script>
+    <!-- Login Dialog -->
+<dialog id="loginDialog">
+    <button class="close-btn" aria-label="Close">✕</button>
+    <form method="dialog" class="login-form">
+        <h2>Log in</h2>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" minlength="3" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" pattern=".+@metropolia\.fi$" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password"
+            pattern="(?=.*[A-Z])(?=.*[0-9]).{6,}" required>
+        <menu>
+            <button value="cancel" class="cancel-btn">Cancel</button>
+            <button value="submit" class="submit-btn">Log in</button>
+        </menu>
+    </form>
+</dialog>
+
+<!-- Sign Up Dialog -->
+<dialog id="signupDialog">
+    <button class="close-btn" aria-label="Close">✕</button>
+    <form method="dialog" class="signup-form">
+        <h2>Sign up</h2>
+        <div class="form-row">
+            <div>
+                <label for="signup-name">First Name:</label>
+                <input type="text" id="signup-name" name="signup-name" minlength="2" required>
+            </div>
+            <div>
+                <label for="signup-surname">Last Name:</label>
+                <input type="text" id="signup-surname" name="signup-surname" minlength="2" required>
+            </div>
+        </div>
+        <label for="signup-age">Age:</label>
+        <input type="number" id="signup-age" name="signup-age" min="16" max="120" required>
+        <label for="signup-email">Email:</label>
+        <input type="email" id="signup-email" name="signup-email" pattern=".+@metropolia\.fi$" required>
+        <p class="instructions">Must be a @metropolia.fi email address</p>
+        <label for="signup-password">Password:</label>
+        <input type="password" id="signup-password" name="signup-password"
+            pattern="(?=.*[A-Z])(?=.*[0-9]).{6,}" required>
+        <p class="instructions">Must contain at least one uppercase letter, one number, and be at least 6 characters long</p>
+        <menu>
+            <button value="cancel" class="cancel-btn">Cancel</button>
+            <button value="submit" class="submit-btn">Sign up</button>
+        </menu>
+    </form>
+</dialog>
+
+    <!-- Cart Panel -->
+    <div class="cart-panel">
+        <div class="cart-header">
+            <h2>Your Order</h2>
+            <button class="close-cart">×</button>
+        </div>
+        <div class="cart-items">
+            <div class="empty-cart">
+                <div>🛒</div>
+                <p>Your cart is empty</p>
+            </div>
+        </div>
+        <div class="cart-summary">
+            <div class="summary-row">
+                <span>Subtotal:</span>
+                <span class="cart-subtotal">€0.00</span>
+            </div>
+            <div class="summary-row">
+                <span>Delivery fee:</span>
+                <span class="delivery-fee">€2.50</span>
+            </div>
+            <div class="summary-row summary-total">
+                <span>Total:</span>
+                <span class="cart-total">€2.50</span>
+            </div>
+            <button class="checkout-btn">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+</body>
+</html>
