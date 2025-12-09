@@ -1,0 +1,20 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const menuController_1 = require("../controllers/menuController");
+const router = (0, express_1.Router)();
+router.get('/today', menuController_1.getTodayMenu);
+router.get('/today/vegan', menuController_1.getTodayVeganMenu);
+router.get('/weekly', menuController_1.getWeeklyMenu);
+router.get('/dates', menuController_1.getAvailableMenuDates);
+router.get('/range', menuController_1.getMenuByDateRange);
+router.get('/stats/:date', menuController_1.getMenuStats);
+router.post('/', menuController_1.addToMenu);
+router.post('/bulk', menuController_1.bulkAddToMenu);
+router.put('/price/:menuId', menuController_1.updateMenuItemPrice);
+router.put('/reset-price/:menuId', menuController_1.resetMenuItemPrice);
+router.delete('/:menuId', menuController_1.removeFromMenu);
+router.delete('/clear/:date', menuController_1.clearMenuForDate);
+router.get('/:date', menuController_1.getMenuByDate);
+exports.default = router;
+//# sourceMappingURL=menuRoutes.js.map

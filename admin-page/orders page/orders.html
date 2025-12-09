@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Orders Management - Your Slice</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/admin-page/shared/admin-styles.css">
+    <link rel="stylesheet" href="orders.css" />
+    <script src="/admin-page/shared/api-client.js" defer></script>
+    <script src="/admin-page/shared/sidebar-manager.js" defer></script>
+    <script src="/admin-page/loginJS/login.js" defer></script>
+    <script src="./orders.js" defer></script>
+</head>
+
+<body class="pre-login">
+    <!-- Login Dialog -->
+    <dialog id="loginDialog">
+        <button class="close-btn" aria-label="Sulje"></button>
+        
+        <form method="dialog" class="login-form" id="loginForm">
+            <h2>Kirjaudu sisään</h2>
+
+            <label for="name">Nimi:</label>
+            <input type="text" id="name" name="name" minlength="3" required>
+            <div class="error-message" id="nameError">Nimen tulee olla vähintään 3 merkkiä pitkä</div>
+ 
+            <label for="email">Sähköposti:</label>
+            <input type="email" id="email" name="email" pattern=".+@metropolia\.fi$" required>
+            <div class="error-message" id="emailError">Sähköpostin tulee olla @metropolia.fi -pääte</div>
+
+            <label for="password">Salasana:</label>
+            <input type="password" id="password" name="password"
+                pattern="(?=.*[A-Z])(?=.*[0-9]).{6,}" required>
+            <div class="error-message" id="passwordError">Salasanan tulee olla vähintään 6 merkkiä pitkä, sisältää vähintään yhden ison kirjaimen ja yhden numeron</div>
+            <menu>
+                <button value="submit" class="submit-btn">Kirjaudu</button>
+            </menu>
+        </form>
+    </dialog>
+
+    <!-- Admin Dashboard -->
+    <div class="admin-container">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <div class="sidebar-header">
+          <h2>🍕 <span>Your Slice Admin</span></h2>
+        </div>
+        <ul class="sidebar-menu">
+          <li>
+            <a href="/admin-page/admin/adminPage.html" class="nav-link" data-page="dashboard"
+              ><i class="fas fa-chart-bar"></i> <span>Dashboard</span></a
+            >
+          </li>
+          <li>
+            <a href="/admin-page/orders page/orders.html" class="nav-link active" data-page="orders"
+              ><i class="fas fa-receipt"></i> <span>Orders</span></a
+            >
+          </li>
+          <li>
+            <a href="/admin-page/menu page/menu.html" class="nav-link" data-page="menu"
+              ><i class="fas fa-utensils"></i> <span>Menu Items</span></a
+            >
+          </li>
+          <li>
+            <a href="/admin-page/customer page/customer.html" class="nav-link" data-page="customers"
+              ><i class="fas fa-users"></i> <span>Customers</span></a
+            >
+          </li>
+          <li>
+            <a href="#" class="nav-link" data-page="settings"><i class="fas fa-cog"></i> <span>Settings</span></a>
+          </li>
+          <li>
+            <a href="/main-page/mainPage.html" class="nav-link"><i class="fas fa-arrow-left"></i> <span>Back to Store</span></a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <div class="admin-header">
+          <h1><i class="fas fa-receipt"></i> Orders Management</h1>
+          <div class="user-info" id="userInfo">
+            <div class="user-avatar" id="userAvatarLetter">A</div>
+            <span id="userNameDisplay">Admin User <i class="fas fa-chevron-down"></i></span>
+
+            <ul class="user-menu" id="userMenu">
+              <li>
+                <a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> <span>Logout</span></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-container">
+          <input type="text" id="searchOrder" placeholder="Search orders..." />
+        </div>
+
+        <!-- Orders Table -->
+        <div class="orders-table">
+          <div class="table-header">
+            <h2>All Orders</h2>
+            <div class="filters">
+              <button class="filter-btn active" data-filter="all">All</button>
+              <button class="filter-btn" data-filter="new">New</button>
+              <button class="filter-btn" data-filter="processing">Processing</button>
+              <button class="filter-btn" data-filter="completed">Completed</button>
+            </div>
+          </div>
+          <div id="ordersLoading" class="loading-message">
+            <p><i class="fas fa-spinner fa-spin"></i> Loading orders...</p>
+          </div>
+          <div id="ordersEmpty" class="empty-message" style="display: none;">
+            <p>No orders found</p>
+          </div>
+          <table id="ordersTableBody" style="display: none;">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Items</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="ordersTableContent">
+              <!-- Orders loaded dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>
